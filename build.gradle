@@ -23,7 +23,7 @@ allprojects {
 
 //任务
 task clean(type: Delete) {
-    diFirst{
+    doFirst{
         println "开始执行"
     }
     println "haha"
