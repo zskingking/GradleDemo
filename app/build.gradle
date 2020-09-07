@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        applicationId "com.example.gradledemo"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs{
+
+    }
+    //配置环境
+    buildTypes {
+        debug{
+
+        }
+        intenal{
+            initWith debug
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    //定义纬度,是否付费，可定义多个。
+    flavorDimensions "paying","notion"
+    //配置渠道，如免费、付费或者多渠道应用商店...可在不同的渠道中做做对应的参数配置
+    productFlavors{
+        //paying渠道，免费
+        free{
+            dimension "paying"
+        }
+        //paying渠道，付费
+        paid{
+            dimension "paying"
+        }
+
+        //notion渠道，中国
+        china{
+            dimension "notion"
+        }
+
+        //notion渠道，国际
+        global{
+            dimension "notion"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}
